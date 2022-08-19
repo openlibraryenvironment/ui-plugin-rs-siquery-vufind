@@ -9,7 +9,7 @@ const SearchAndFilter = ({ setSearchParams }) => {
     e.preventDefault();
     e.stopPropagation();
     setSearchParams({
-      lookfor: encodeURIComponent(query),
+      lookfor: query,
       field: ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'placesOfPublication', 'publicationDates', 'publishers']
     });
   };
