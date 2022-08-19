@@ -83,6 +83,10 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
             >
               <MultiColumnList
                 autosize
+                columnMapping={{
+                  title: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.title" />,
+                  authors: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.contributors" />,
+                }}
                 contentData={results}
                 formatter={{
                   authors: v => (typeof v?.authors?.primary === 'object' ? Object.keys(v.authors.primary).join('; ') : ''),
