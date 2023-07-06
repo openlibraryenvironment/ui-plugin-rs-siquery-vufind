@@ -63,8 +63,8 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
         onClose={() => setIsOpen(false)}
         closeOnBackgroundClick
         dismissible
-        size="large"
         contentClass={css.pluginModalContent}
+        style={{ width: '80vw', 'max-width': '80vw', height: '80vw' }}
       >
         <Paneset isRoot>
           <Pane
@@ -86,10 +86,15 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
                 columnMapping={{
                   title: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.title" />,
                   authors: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.contributors" />,
+                  edition: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.edition" />,
+                  formats: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.formats" />,
+                  physicalDescriptions: <FormattedMessage id="ui-plugin-rs-siquery-vufind.columns.description" />,
                 }}
                 contentData={results}
                 formatter={{
                   authors: v => (typeof v?.authors?.primary === 'object' ? Object.keys(v.authors.primary).join('; ') : ''),
+                  formats: rec => rec.formats.join(', '),
+                  physicalDescriptions: rec => rec.physicalDescriptions.join(', '),
                 }}
                 hasMargin
                 loading={query?.isFetching}
@@ -98,7 +103,7 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
                 pageAmount={PER_PAGE}
                 totalCount={totalCount}
                 virtualize
-                visibleColumns={['title', 'authors']}
+                visibleColumns={['title', 'authors', 'edition', 'formats', 'physicalDescriptions']}
               />
             </Pane>
           }

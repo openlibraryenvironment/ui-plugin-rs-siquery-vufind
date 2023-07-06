@@ -14,7 +14,7 @@ const SearchAndFilter = ({ setSearchParams }) => {
     setSearchParams({
       lookfor: query,
       type: searchIndex,
-      field: ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'placesOfPublication', 'publicationDates', 'publishers']
+      field: ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'formats', 'physicalDescriptions', 'placesOfPublication', 'publicationDates', 'publishers']
     });
   };
   return (

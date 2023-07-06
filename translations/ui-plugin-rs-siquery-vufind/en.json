@@ -7,6 +7,9 @@
   "columns.title": "Title",
   "columns.contributors": "Contributors",
   "columns.publishers": "Publishers",
+  "columns.edition": "Edition",
+  "columns.formats": "Format",
+  "columns.description": "Description",
 
   "index.AllFields": "All fields",
   "index.Title": "Title",
