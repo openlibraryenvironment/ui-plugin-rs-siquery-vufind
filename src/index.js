@@ -8,8 +8,10 @@ import { Button, LoadingPane, Modal, MultiColumnList, Pane, Paneset } from '@fol
 
 import SearchAndFilter from './components/SearchAndFilter';
 import css from './index.css';
+import { useIntlCallout } from '@reshare/stripes-reshare';
 
 const PER_PAGE = 60;
+const field = ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'formats', 'physicalDescriptions', 'placesOfPublication', 'publicationDates', 'publishers'];
 
 const recordToReshareForm = rec => {
   if (typeof rec !== 'object') return null;
@@ -29,13 +31,14 @@ const recordToReshareForm = rec => {
   return res;
 };
 
-const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, searchLabel }) => {
+const PluginRsSIQueryVufind = ({ disabled, endpoint, selectInstance, searchButtonStyle, searchLabel, specifiedId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams, setSearchParams] = useState('');
+  const sendCallout = useIntlCallout();
 
   const query = useInfiniteQuery({
     queryKey: ['vufindLookup', searchParams],
-    queryFn: ({ pageParam = 0 }) => ky(`${endpoint}/api/v1/search?${queryString.stringify({ ...searchParams, page: pageParam, limit: PER_PAGE }, { arrayFormat: 'bracket' })}`).json(),
+    queryFn: ({ pageParam = 0 }) => ky(`${endpoint}/api/v1/search?${queryString.stringify({ ...searchParams, field, page: pageParam, limit: PER_PAGE }, { arrayFormat: 'bracket' })}`).json(),
     useErrorBoundary: true,
     staleTime: 2 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
@@ -43,6 +46,23 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
   });
   const results = query?.data?.pages?.flatMap(x => x?.records ?? []);
   const totalCount = query?.data?.pages?.[0]?.resultCount;
+
+  const onButton = async () => {
+    if (!specifiedId) {
+      setIsOpen(true);
+      return;
+    }
+    const res = await ky(`${endpoint}/api/v1/record?${queryString.stringify({ id: specifiedId, field }, { arrayFormat: 'bracket' })}`)
+      .json()
+      .catch(async e => {
+        const errBody = await e.response?.text();
+        const errMsg = (typeof errBody === 'string' && errBody.startsWith('{')) ? JSON.parse(errBody)?.statusMessage : '';
+        sendCallout('ui-plugin-rs-siquery-vufind.byIdError', 'error', { errMsg });
+      });
+    if (res?.status === 'OK' && res?.resultCount === 1) {
+      selectInstance(recordToReshareForm(res.records?.[0]));
+    }
+  };
 
   const onSelect = record => {
     selectInstance(recordToReshareForm(record));
@@ -53,7 +73,8 @@ const PluginRsSIQueryVufind = ({ endpoint, selectInstance, searchButtonStyle, se
     <>
       <Button
         buttonStyle={searchButtonStyle}
-        onClick={() => setIsOpen(true)}
+        disabled={disabled}
+        onClick={onButton}
       >
         {searchLabel}
       </Button>

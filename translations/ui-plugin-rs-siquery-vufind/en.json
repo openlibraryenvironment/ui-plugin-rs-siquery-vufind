@@ -4,6 +4,8 @@
   "resultsHeader": "Search results",
   "filters.language": "Language",
 
+  "byIdError": "Error looking up id from VuFind: {errMsg}",
+
   "columns.title": "Title",
   "columns.contributors": "Contributors",
   "columns.publishers": "Publishers",
