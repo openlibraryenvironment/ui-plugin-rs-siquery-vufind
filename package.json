@@ -19,7 +19,7 @@
     "eslint": "^7.32.0"
   },
   "dependencies": {
-    "@reshare/stripes-reshare": "^1.10.0",
+    "@reshare/stripes-reshare": "^1.11.0",
     "ky": "^0.23.0",
     "query-string": "^8.1.0"
   },
