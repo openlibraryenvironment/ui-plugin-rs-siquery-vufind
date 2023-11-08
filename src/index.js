@@ -5,10 +5,10 @@ import { useInfiniteQuery } from 'react-query';
 import { useState } from 'react';
 
 import { Button, LoadingPane, Modal, MultiColumnList, Pane, Paneset } from '@folio/stripes/components';
+import { useIntlCallout } from '@reshare/stripes-reshare';
 
 import SearchAndFilter from './components/SearchAndFilter';
 import css from './index.css';
-import { useIntlCallout } from '@reshare/stripes-reshare';
 
 const PER_PAGE = 60;
 const field = ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'formats', 'physicalDescriptions', 'placesOfPublication', 'publicationDates', 'publishers'];
