@@ -28,7 +28,8 @@ const recordToReshareForm = rec => {
     publicationDate: rec?.publicationDates?.join('; '),
     placeOfPublication: rec?.placesOfPublication?.join('; '),
   };
-  return res;
+  // exclude fields without truthy value such as those containing an empty string
+  return Object.fromEntries(Object.entries(res).filter(([_key, value]) => value));
 };
 
 const PluginRsSIQueryVufind = ({ disabled, endpoint, selectInstance, searchButtonStyle, searchLabel, specifiedId }) => {
