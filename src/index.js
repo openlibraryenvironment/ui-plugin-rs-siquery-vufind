@@ -5,7 +5,7 @@ import { useInfiniteQuery } from 'react-query';
 import { useState } from 'react';
 
 import { Button, LoadingPane, Modal, MultiColumnList, Pane, Paneset } from '@folio/stripes/components';
-import { useIntlCallout } from '@reshare/stripes-reshare';
+import { useIntlCallout } from '@projectreshare/stripes-reshare';
 
 import SearchAndFilter from './components/SearchAndFilter';
 import css from './index.css';
