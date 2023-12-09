@@ -8,7 +8,7 @@ import { Button, LoadingPane, Modal, MultiColumnList, Pane, Paneset } from '@fol
 
 import SearchAndFilter from './components/SearchAndFilter';
 import css from './index.css';
-import { useIntlCallout } from '@reshare/stripes-reshare';
+import { useIntlCallout } from '@projectreshare/stripes-reshare';
 
 const PER_PAGE = 60;
 const field = ['id', 'authors', 'title', 'cleanIsbn', 'cleanIssn', 'cleanOclcNumber', 'edition', 'formats', 'physicalDescriptions', 'placesOfPublication', 'publicationDates', 'publishers'];

@@ -1,6 +1,6 @@
 {
-  "name": "@reshare/plugin-rs-siquery-vufind",
-  "version": "1.1.0",
+  "name": "@projectreshare/plugin-rs-siquery-vufind",
+  "version": "1.1.1",
   "description": "Plugin to find an instance from an SI via the Vufind API",
   "main": "src/index.js",
   "license": "Apache-2.0",
@@ -19,7 +19,7 @@
     "eslint": "^7.32.0"
   },
   "dependencies": {
-    "@reshare/stripes-reshare": "^1.10.0",
+    "@projectreshare/stripes-reshare": "^1.10.0",
     "ky": "^0.23.0",
     "query-string": "^8.1.0"
   },
@@ -28,5 +28,9 @@
     "react": "*",
     "react-intl": "^5.21.0",
     "react-query": "^3.9.0"
+  },
+  "resolutions": {
+    "@rehooks/local-storage": "2.4.4",
+    "postcss-nesting" : "^10.0.0"
   }
 }
