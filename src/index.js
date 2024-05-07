@@ -18,6 +18,7 @@ const recordToReshareForm = rec => {
   const res = {
     systemInstanceIdentifier: rec.id,
     title: rec.title,
+    subtitle: rec.subTitle,
     author: ((typeof rec?.authors?.primary === 'object' ? Object.keys(rec.authors.primary).join('; ') : '')
               ?? (typeof rec?.authors?.corporate === 'object' ? Object.keys(rec.authors.corporate).join('; ') : '')),
     edition: rec?.edition,
